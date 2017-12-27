@@ -1,6 +1,7 @@
 PROJPATH=${GOPATH}/src/github.com/toxeus/go-secp256k1
+
 default:
-	go run main.go
+	go run *.go
 
 installdeps:
 	go get github.com/akamensky/base58
