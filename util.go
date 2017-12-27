@@ -70,3 +70,11 @@ func doubleSha256(bytes []byte) []byte {
 	doubleSha := sha256.Sum256(firstSha[:])
 	return doubleSha[:]
 }
+
+func printKeys(pubKey string, privateKey string) {
+	println("================================================================================\n")
+	fmt.Printf(" Public key:\n    %s\n", pubKey)
+	println()
+	fmt.Printf(" Private key:\n    %s\n", privateKey)
+	println("\n================================================================================")
+}
