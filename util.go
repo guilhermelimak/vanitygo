@@ -52,7 +52,7 @@ func privKeyToPub(privKeySlice []byte) []byte {
 		panic("Invalid private key")
 	}
 
-	pubKey, success := secp256k1.Pubkey_create(privKey, true)
+	pubKey, success := secp256k1.Pubkey_create(privKey, false)
 
 	if !success {
 		panic("Error creating public key")
