@@ -4,10 +4,12 @@ import (
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"strings"
 
 	"github.com/akamensky/base58"
 	secp256k1 "github.com/toxeus/go-secp256k1"
+	"golang.org/x/crypto/ripemd160"
 )
 
 func getRandomBytes(amount int) ([]byte, error) {
@@ -39,7 +41,7 @@ func bytesToWif(version []byte, bytes []byte) string {
 func privKeyToPub(privKeySlice []byte) []byte {
 	var privKey [32]byte
 
-	copy(privKey[:], privKeySlice[0:32])
+	copy(privKey[:], privKeySlice[:])
 
 	secp256k1.Start()
 	defer secp256k1.Stop()
@@ -65,16 +67,34 @@ func privKeyToPub(privKeySlice []byte) []byte {
 	return pubKey
 }
 
+func hashRipemd160(publicKey []byte) []byte {
+	r := ripemd160.New()
+
+	pubKeySha := sha256.Sum256(publicKey)
+
+	r.Write(pubKeySha[:])
+
+	return r.Sum(nil)
+}
+
 func doubleSha256(bytes []byte) []byte {
 	firstSha := sha256.Sum256(bytes)
 	doubleSha := sha256.Sum256(firstSha[:])
 	return doubleSha[:]
 }
 
-func printKeys(pubKey string, privateKey string) {
-	println("================================================================================\n")
-	fmt.Printf(" Public key:\n    %s\n", pubKey)
+func checkAddressVanity(addr string, expected string) bool {
+	return strings.Contains(addr, expected)
+}
+
+func printKeys(pubKey string, privateKey string, address string) {
+	println("================================================================================")
 	println()
-	fmt.Printf(" Private key:\n    %s\n", privateKey)
-	println("\n================================================================================")
+	fmt.Printf("     Private key:\n       %s\n", privateKey)
+	println()
+	fmt.Printf("     Public key:\n       %s\n", pubKey)
+	println()
+	fmt.Printf("     Addresss:\n       %s\n", address)
+	println()
+	println("================================================================================")
 }
