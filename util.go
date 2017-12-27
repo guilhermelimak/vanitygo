@@ -87,14 +87,14 @@ func checkAddressVanity(addr string, expected string) bool {
 	return strings.Contains(addr, expected)
 }
 
-func printKeys(pubKey string, privateKey string, address string) {
+func printKeys(wallet Wallet) {
 	println("================================================================================")
 	println()
-	fmt.Printf("     Private key:\n       %s\n", privateKey)
+	fmt.Printf("     Private key:\n       %s\n", wallet.PrivateKey)
 	println()
-	fmt.Printf("     Public key:\n       %s\n", pubKey)
+	fmt.Printf("     Public key:\n       %s\n", wallet.PublicKey)
 	println()
-	fmt.Printf("     Addresss:\n       %s\n", address)
+	fmt.Printf("     Addresss:\n       %s\n", wallet.Address)
 	println()
 	println("================================================================================")
 }

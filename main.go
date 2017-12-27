@@ -1,36 +1,36 @@
 package main
 
 import (
-	"strings"
+	"os"
+
+	"github.com/urfave/cli"
 )
 
 func main() {
-	privateKey, privateKeyBytes := getPrivateKey()
-	publicKey, publicKeyBytes := getPubKey(privateKeyBytes)
-	address := generateAddress(publicKeyBytes)
-	printKeys(publicKey, privateKey, address)
-}
+	app := cli.NewApp()
+	app.Name = "vanitygo"
+	app.Usage = "Generate vanity bitcoin addresses with golanng"
 
-func getPrivateKey() (privateKey string, privKeyBytes []byte) {
-	bytes, err := getRandomBytes(32)
-
-	if err != nil {
-		panic(err)
+	app.Commands = []cli.Command{
+		{
+			Name:    "generate",
+			Aliases: []string{"g"},
+			Usage:   "Generate public and private keys and an address",
+			Action: func(c *cli.Context) error {
+				generate()
+				return nil
+			},
+		},
+		{
+			Name:    "vanity",
+			Aliases: []string{"v"},
+			Usage:   "Generate address until it contains string",
+			Action: func(c *cli.Context) error {
+				generateVanity(c.Args().First())
+				return nil
+			},
+		},
 	}
 
-	version := []byte{128}
-	return bytesToWif(version, bytes), bytes
-}
-
-func getPubKey(privKeyBytes []byte) (string, []byte) {
-	publicKeyBytes := privKeyToPub(privKeyBytes)
-
-	return strings.ToLower(bytesToHex(publicKeyBytes)), publicKeyBytes
-}
-
-func generateAddress(publicKey []byte) string {
-	version := []byte{0}
-	ripHash := hashRipemd160(publicKey)
-
-	return bytesToWif(version, ripHash)
+	app.Run(os.Args)
 }
