@@ -29,7 +29,6 @@ func getPubKey(privKeyBytes []byte) (string, []byte) {
 }
 
 func generateAddress(publicKey []byte) string {
-	// Version concatenated with RIPEMD-160(SHA-256(public key))
 	version := []byte{0}
 	ripHash := hashRipemd160(publicKey)
 
