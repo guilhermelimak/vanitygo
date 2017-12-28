@@ -59,7 +59,7 @@ func generateVanity(expected string) {
 		}
 
 		tries++
-		fmt.Printf("\x0cTries: %d\n", tries)
+		fmt.Printf("Tries: %d\n", tries)
 	}
 }
 
