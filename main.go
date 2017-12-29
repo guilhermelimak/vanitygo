@@ -26,7 +26,8 @@ func main() {
 			Aliases: []string{"v"},
 			Usage:   "Generate address until it contains string",
 			Action: func(c *cli.Context) error {
-				generateVanity(c.Args().First())
+				go generateVanity(c.Args().First())
+				drawUI()
 				return nil
 			},
 		},

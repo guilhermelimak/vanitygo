@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"runtime"
 	"strings"
+	"time"
 )
 
 // Wallet  is used to group a public and private key and an address
@@ -42,6 +43,8 @@ func _generateVanity(expected string, cSuccess chan bool, cWallet chan Wallet) {
 }
 
 func generateVanity(expected string) {
+	runtime.GOMAXPROCS(8)
+	start := time.Now()
 	cSuccess := make(chan bool)
 	cWallet := make(chan Wallet)
 
@@ -54,12 +57,14 @@ func generateVanity(expected string) {
 		wallet := <-cWallet
 
 		if success {
-			printKeys(wallet)
+			drawWallet(wallet, expected)
 			break
 		}
 
 		tries++
-		fmt.Printf("Tries: %d\n", tries)
+		time := time.Since(start).Seconds()
+		hps := float64(tries) / time
+		drawHashRate(hps)
 	}
 }
 
