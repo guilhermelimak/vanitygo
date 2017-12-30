@@ -51,16 +51,16 @@ func drawHashRate(hashRate float64) {
 	ui.Render(p)
 }
 
-func drawWallet(wallet Wallet, expected string) *ui.Par {
-	formattedExpected := fmt.Sprintf("[%s](fg-green)", expected)
-	addr := strings.Replace(wallet.Address, expected, formattedExpected, -1)
+func drawWallet(wallet Wallet, vanityString string) *ui.Par {
+	formattedVanityString := fmt.Sprintf("[%s](fg-green)", vanityString)
+	addr := strings.Replace(wallet.Address, vanityString, formattedVanityString, -1)
 
-	expectedMsg := fmt.Sprintf("Expected string: [%s](fg-green)\n", expected)
-	privMsg := fmt.Sprintf("Private key:\n\n[%s](fg-red)\n", wallet.PrivateKey)
-	pubMsg := fmt.Sprintf("Public key:\n\n%s\n", wallet.PublicKey)
-	addrMsg := fmt.Sprintf("Addresss:\n\n%s\n", addr)
+	expectedMsg := fmt.Sprintf("[Vanity string:](fg-blue)\n[%s](fg-green)\n", vanityString)
+	privMsg := fmt.Sprintf("[Private key:](fg-blue)\n[%s](fg-red)\n", wallet.PrivateKey)
+	pubMsg := fmt.Sprintf("[Public key:](fg-blue)\n%s\n", wallet.PublicKey)
+	addrMsg := fmt.Sprintf("[Addresss:](fg-blue)\n%s\n", addr)
 
-	msg := privMsg + "\n" + pubMsg + "\n" + expectedMsg + "\n" + addrMsg
+	msg := "\n" + expectedMsg + "\n" + addrMsg + "\n" + privMsg + "\n" + pubMsg
 
 	p := ui.NewPar(msg)
 	p.BorderFg = ui.ColorBlack
@@ -68,7 +68,7 @@ func drawWallet(wallet Wallet, expected string) *ui.Par {
 	p.PaddingLeft = 1
 	p.PaddingTop = 1
 	p.PaddingRight = 1
-	p.Height = 19
+	p.Height = 18
 	p.Width = 70
 	p.Float = ui.AlignCenter
 	p.TextFgColor = ui.ColorWhite

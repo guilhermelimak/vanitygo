@@ -3,6 +3,9 @@ PROJPATH=${GOPATH}/src/github.com/toxeus/go-secp256k1
 default:
 	go run *.go
 
+build:
+	go build -o vanitygo *.go
+
 deps:
 	go get github.com/akamensky/base58
 	go get -u github.com/gizak/termui
