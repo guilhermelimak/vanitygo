@@ -2,7 +2,7 @@
 
 Create Bitcoin vanity addresses
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![Generating address](https://github.com/guilhermelimak/vanitygo/raw/master/vanitygo.gif)
 
 ##### Development
 
