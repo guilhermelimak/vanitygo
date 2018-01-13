@@ -7,6 +7,12 @@ PROJPATH=${GOPATH}/src/github.com/guilhermelimak/go-secp256k1
 default:
 	go run *.go
 
+vanity:
+	go run *.go v 666
+
+generate:
+	go run *.go g
+
 build:
 	go build -o vanitygo *.go
 

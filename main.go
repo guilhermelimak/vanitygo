@@ -17,7 +17,8 @@ func main() {
 			Aliases: []string{"g"},
 			Usage:   "Generate public and private keys and an address",
 			Action: func(c *cli.Context) error {
-				generate()
+				go generateSimpleWallet()
+				drawUI()
 				return nil
 			},
 		},
