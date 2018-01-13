@@ -3,6 +3,7 @@ package main
 import (
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -33,31 +34,28 @@ func generate() {
 	printKeys(wallet)
 }
 
-func _generateVanity(expected string, cSuccess chan bool, cWallet chan Wallet) {
-	wallet := _generate()
-
-	hasVanity := checkAddressVanity(wallet.Address, expected)
-
-	cSuccess <- hasVanity
-	cWallet <- wallet
+func _generateVanity(expected string) (hasVanity bool, wallet Wallet) {
+	const wallet = _generate()
+	return checkAddressVanity(wallet.Address, expected), wallet
 }
 
 func generateVanity(expected string) {
-	runtime.GOMAXPROCS(8)
+	runtime.GOMAXPROCS(4)
 	start := time.Now()
-	cSuccess := make(chan bool)
-	cWallet := make(chan Wallet)
+
+	var wg sync.WaitGroup
+	wg.Add(1)
 
 	tries := 0
 
-	for {
-		go _generateVanity(expected, cSuccess, cWallet)
+	done := false
 
-		success := <-cSuccess
-		wallet := <-cWallet
+	for {
+		success, wallet := _generateVanity(expected)
 
 		if success {
 			drawWallet(wallet, expected)
+			defer wg.Done()
 			break
 		}
 
