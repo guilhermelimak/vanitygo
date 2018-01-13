@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/akamensky/base58"
-	secp256k1 "github.com/toxeus/go-secp256k1"
+	secp256k1 "github.com/guilhermelimak/go-secp256k1"
 	"golang.org/x/crypto/ripemd160"
 )
 
