@@ -1,0 +1,35 @@
+hash: aee6037a145897a1e5e949125b3ea6b097ddbc708cc6e3557d43f5decf62119a
+updated: 2018-01-16T01:12:34.850573928-02:00
+imports:
+- name: github.com/akamensky/base58
+  version: 92b0f56f531ac8c9d3087f33a4bcd5bca9cd5fb7
+- name: github.com/gizak/termui
+  version: e9a3a6b3d6472ce875254d734f36335c15ebd4e6
+- name: github.com/guilhermelimak/go-secp256k1
+  version: 27b0155afd034093ec1feabab769ecb64a655782
+- name: github.com/maruel/panicparse
+  version: c0182c169410cfa80c7e8f046dad208eaef91338
+  subpackages:
+  - stack
+- name: github.com/mattn/go-runewidth
+  version: 97311d9f7767e3d6f422ea06661bc2c7a19e8a5d
+- name: github.com/mitchellh/go-wordwrap
+  version: ad45545899c7b13c020ea92b2072220eefad42b8
+- name: github.com/nsf/termbox-go
+  version: 8c5e0793e04afcda7fe23d0751791e7321df4265
+- name: github.com/urfave/cli
+  version: 75104e932ac2ddb944a6ea19d9f9f26316ff1145
+- name: golang.org/x/crypto
+  version: 13931e22f9e72ea58bb73048bc752b48c6d4d4ac
+  subpackages:
+  - ripemd160
+- name: golang.org/x/text
+  version: e19ae1496984b1c655b8044a65c0300a3c878dd3
+  subpackages:
+  - internal/colltab
+  - internal/tag
+  - language
+  - search
+  - transform
+  - unicode/norm
+testImports: []

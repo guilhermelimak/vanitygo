@@ -1,0 +1,13 @@
+package: vanitygo
+import:
+- package: github.com/akamensky/base58
+- package: github.com/gizak/termui
+- package: github.com/guilhermelimak/go-secp256k1
+- package: github.com/urfave/cli
+- package: golang.org/x/crypto
+  subpackages:
+  - ripemd160
+- package: golang.org/x/text
+  subpackages:
+  - language
+  - search
